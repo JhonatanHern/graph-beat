@@ -1,16 +1,13 @@
-module.exports = `
-type Query {
-    getArtists: [Artist!]
-    getSongs(artist: String!): [Album!]
-},
-type Artist {
-    title: String!
-},
-type Album {
-    title: String!
-    songs:[Song!]!
-},
-type Song {
-    title: String!
+const fs = require('fs')
+let schema
+try{
+	schema = fs.readFileSync('./store/schema.gql')
+}catch(e){
+	if (e.code==='ENOENT') {
+		console.log( 'schema file not found' )
+	}
+	console.log(e.code)
+	console.log(e)
+	process.exit()
 }
-`
+module.exports = schema.toString()
