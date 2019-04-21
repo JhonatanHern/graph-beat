@@ -2,8 +2,49 @@
 <html>
 <head>
 	<title>REEEE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<meta charset="utf-8">
+	<style>
+		*{box-sizing: border-box;}
+		html,body{
+			max-height: 100%;
+			width: 100vw;
+			margin: 0;
+			overflow-x: hidden;
+		}
+		#d{
+			padding: 3em;
+			background-color: #dcc;
+			position: relative;
+		}
+	</style>
 </head>
 <body>
-
+	<h1 id="h1" style="width: 100%">Hello</h1>
+	<div id="d">
+		Hello
+	</div>
+	<script>
+		var start = null,last = 0
+		d.addEventListener('touchstart', s, false)
+		d.addEventListener('touchmove', r, false)
+		d.addEventListener('touchend', en, false)
+		function s(e) {
+			if (!start) {
+				start = e.touches[0].clientX - last
+			}
+			h1.innerText = 'start'
+		}
+		function r(e) {
+			var x = e.touches[0].clientX
+			last = x - start
+			d.style.transform = 'translateX(' + Math.floor( last ) + 'px)'
+			h1.innerText = 'middle'
+		}
+		function en(e) {
+			start = null
+			h1.innerText = 'end'
+		}
+	</script>
 </body>
 </html>
