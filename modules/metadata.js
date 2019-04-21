@@ -38,10 +38,14 @@ class Metadata{
 			values = values.filter(v=>v).map(v=>({title:v,songs:[]}))
 			const albumDataPromises = values.map(v=>Metadata.getSongsFromAlbum(v.title,artist,v.songs))
 			await Promise.all(albumDataPromises)
+			values.push({
+				title:"singles",
+				songs:data.filter(file=>/\.mp3$/.test(file)).map(s=>({title:s}))
+			})
+			values = values.filter(album=>(album.songs.length>0))//filter empty albums
 			succ(values)
 		})
 	}
-	//args: { albumName : String ,}
 	static getSongsFromAlbum(albumName,artist,arrayToPush){
 		return new Promise(async (succ,err)=>{
 			let songs = await fs.readdir(`${globalAppData.tracksDir}/${artist}/${albumName}`)
