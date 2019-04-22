@@ -39,6 +39,7 @@ body,html{
             border-right: 4px solid var(--main-color);
             position: relative;
             transition-duration: .15s;
+            overflow-y: auto;
             &.active{
                 padding: 1em;
                 width: 20%;
@@ -49,15 +50,40 @@ body,html{
                 >span{
                     display: none;
                 }
+                b,button{
+                    display: block;
+                }
             }
             >*{
                 display: none;
             }
             >span{
-                font-size: 2em;
+                position: relative;
+                background-color: #333;
+                height: 3px;
+                width: 2em;
                 display: block;
+                margin-bottom: 7px;
+                left:50%;
+                transform: translateX(-50%);
+                &:first-of-type{
+                    margin-top: 5px;
+                }
+            }
+            b{
+                background-color: transparent;
+                border: none;
+                font-size: 1em;
+                font-family: inherit;
+                padding: 0;
+                cursor: pointer;
+                margin-bottom: .5em;
+                position: relative;
+                text-align: left;
+                border-bottom: 2px solid var(--main-color);
             }
             button{
+                
                 background-color: transparent;
                 border: none;
                 font-size: 1em;

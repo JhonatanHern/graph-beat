@@ -1,5 +1,5 @@
 export default {
     loadArtists:(artists=[],dispatch)=>{
-        dispatch({type:'SET_ARTISTS',artists:artists})
+        dispatch({ type:'SET_ARTISTS' , artists : artists })
     }
 }

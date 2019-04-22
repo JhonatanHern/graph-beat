@@ -45,16 +45,6 @@
 			start = null
 			h1.innerText = 'end'
 		}
-		fetch('graphql', {
-            method: 'POST',
-            Accept: 'api_version=2',
-            headers: { 'Content-Type': 'application/graphql' },
-            body: '{getArtists{title}}',
-        })
-        .then(r=>r.json())
-        .then(data=>{
-            this.props.setArtists(data.getArtists)
-        })
 	</script>
 </body>
 </html>
