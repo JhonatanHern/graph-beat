@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component , Fragment } from 'react'
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import './App.css'
+import './App.scss'
 import Header from './Header'
 import Menu from './Menu'
 import Albums from './Albums'
@@ -10,7 +10,7 @@ import Track from './Track'
 class App extends Component {
   render() {
     return(
-      <div>
+      <Fragment>
         <Header/>
         <main>
           <Menu/>
@@ -20,7 +20,7 @@ class App extends Component {
         <footer>
           <Track/>
         </footer>
-      </div>
+      </Fragment>
     )
   }
 }

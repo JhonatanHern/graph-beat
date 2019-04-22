@@ -16,11 +16,19 @@ const root = {
 // Create an express server and a GraphQL endpoint
 const app = express()
 app.use(express.static('public'))
-app.use('/graphql', express_graphql({
-    schema: schema,
-    rootValue: root,
-    graphiql: true
-}))
+app.use((req,res,next)=>{
+    console.log('REEE')
+    next()
+})
+app.use('/graphql', (req,res)=>{
+    res.header('Access-Control-Allow-Origin', 'localhost:3000')
+    res.header('Access-Control-Request-Method', 'POST,GET,OPTIONS')
+    express_graphql({
+        schema: schema,
+        rootValue: root,
+        graphiql: true
+    })(req,res)
+})
 
 app.listen(globalAppData.port, () => {
     console.log(`Express + GraphQL Server Now Running On localhost:${globalAppData.port}/`)
