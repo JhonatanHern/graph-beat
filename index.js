@@ -4,6 +4,9 @@ const { buildSchema } = require('graphql')
 
 const metadata = require('./modules/metadata')
 const globalAppData = require('./modules/globalAppData')
+
+const streamRoute = require('./modules/stream')
+
 require('./modules/configInit')()//initialize app
 
 // GraphQL schema
@@ -16,6 +19,8 @@ const root = {
 // Create an express server and a GraphQL endpoint
 const app = express()
 app.use(express.static('public'))
+
+app.use('/stream',streamRoute)
 
 app.use('/graphql',express_graphql({
     schema: schema,

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 function playMode( currentPlay = 'NORMAL' , action ){
+    console.log(action.type,action)
     switch ( action.playMode ){
         case 'NORMAL':
         case 'RANDOM':
@@ -17,9 +18,9 @@ function artists( currentArtists = [] , action ){
     }
     return currentArtists
 }
-function albums( currentAlbums = [] , action ){
-    if(action.type==="SET_ALBUMS"){
-        return action.albums
+function albums( currentAlbums = [] , {type,albums,artist} ){
+    if(type==="SET_ALBUMS"){
+        return {albums,artist}
     }
     return currentAlbums
 }
@@ -29,10 +30,25 @@ function song( currentSong = {} , action ){
     }
     return currentSong
 }
+function playingSong( currentSong = null , action ){
+    if(action.type==="PLAY_SONG"){
+        const {song,album,artist} = action
+        if(!song||!album||!artist){
+            return currentSong
+        }
+        return {
+            song,
+            album,
+            artist
+        }
+    }
+    return currentSong
+}
 
 export default combineReducers({
   playMode,
   artists,
   albums,
-  song
+  song,
+  playingSong
 })

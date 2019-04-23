@@ -30,12 +30,18 @@ class Menu extends React.Component{
             }
         }
         `
-        let data = await((await fetch('/graphql',{
-            method:'POST',
-            headers:{ 'Content-Type' : 'application/graphql' },
-            body:query
-        })).json())
-        console.log(data)
+        let data = (
+            await(
+                (
+                    await fetch('/graphql',{
+                        method:'POST',
+                        headers:{ 'Content-Type' : 'application/graphql' },
+                        body:query
+                    })
+                ).json()
+            )
+        ).data.getSongs
+        this.props.setSingleArtist(data,artist)
     }
     toggleActive = _ => {
         this.setState({active:!this.state.active})
@@ -67,7 +73,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    setArtists:arts=>actions.loadArtists(arts,dispatch)
+    setArtists:arts=>actions.loadArtists(arts,dispatch),
+    setSingleArtist:(albums,artist)=>actions.loadSingleArtist(albums,artist,dispatch)
 })
   
 export default connect(
